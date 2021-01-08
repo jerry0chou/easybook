@@ -1,47 +1,46 @@
-import React,{Component} from "react"
+import React from "react"
+import {connect} from 'react-redux'
 import {HeaderWrapper,Logo,Nav,NavItem,NavSearch,Addition,Button} from "./style";
 
-class Header extends Component {
-    constructor(pros) {
-        super();
-        this.state = {
-            focused:false
-        }
-        this.handleInputFocus = this.handleInputFocus.bind(this);
-        this.handleInputBlur = this.handleInputBlur.bind(this);
-    }
-    handleInputFocus(){
-        console.log('handleInputFocus')
-        this.setState({
-            focused:true
-        })
-    }
-    handleInputBlur(){
-        console.log('handleInputBlur')
-        this.setState({
-            focused:false
-        })
-    }
-   render() {
-       return (
-           <HeaderWrapper>
-               <Logo href='/'/>
-               <Nav>
-                   <NavItem className='left active'>首页</NavItem>
-                   <NavItem className='left'>下载APP</NavItem>
-                   <NavItem className='right'>登陆</NavItem>
-                   <NavItem className='right'>Aa</NavItem>
-                   <NavSearch className={this.state.focused ? 'focused': ''}
-                              onFocus={this.handleInputFocus} onBlur={this.handleInputBlur}
-                   ></NavSearch>
+const Header = (props) =>{
+   return (<HeaderWrapper>
+        <Logo href='/'/>
+        <Nav>
+            <NavItem className='left active'>首页</NavItem>
+            <NavItem className='left'>下载APP</NavItem>
+            <NavItem className='right'>登陆</NavItem>
+            <NavItem className='right'>Aa</NavItem>
+            <NavSearch className={props.focused ? 'focused': ''}
+                       onFocus={props.handleInputFocus} onBlur={props.handleInputBlur}
+            ></NavSearch>
 
-               </Nav>
-               <Addition>
-                   <Button className='writing'>写文章</Button>
-                   <Button className='reg'>注册</Button>
-               </Addition>
-           </HeaderWrapper>
-       )
-   }
+        </Nav>
+        <Addition>
+            <Button className='writing'>写文章</Button>
+            <Button className='reg'>注册</Button>
+        </Addition>
+    </HeaderWrapper>);
 }
-export default Header
+
+const mapStateToProps = (state)=>{
+    return {
+        focused : state.focused
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return{
+        handleInputFocus(){
+            const action={
+                type:'search_focus'
+            }
+            dispatch(action);
+        },
+        handleInputBlur(){
+            const action={
+                type:'search_blur'
+            }
+            dispatch(action);
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Header)
