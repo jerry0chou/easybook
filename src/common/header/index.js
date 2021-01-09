@@ -1,6 +1,7 @@
 import React from "react"
 import {connect} from 'react-redux'
 import {HeaderWrapper,Logo,Nav,NavItem,NavSearch,Addition,Button} from "./style";
+import * as actionCreator from './store/actionCreator'
 
 const Header = (props) =>{
    return (<HeaderWrapper>
@@ -30,16 +31,10 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = (dispatch) => {
     return{
         handleInputFocus(){
-            const action={
-                type:'search_focus'
-            }
-            dispatch(action);
+            dispatch(actionCreator.searchFocus());
         },
         handleInputBlur(){
-            const action={
-                type:'search_blur'
-            }
-            dispatch(action);
+            dispatch(actionCreator.searchBlur());
         }
     }
 }
