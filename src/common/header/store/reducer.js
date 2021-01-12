@@ -3,7 +3,10 @@ import {fromJS} from "immutable";
 
 const defaultStore = fromJS({
     focused:false,
-    list: [] // 这个默认是普通对象，需要改变之前变成immutable类型
+    mouseIn:false,
+    list: [], // 这个默认是普通对象，需要改变之前变成immutable类型,
+    page: 1,
+    totalPage: 1
 });
 
 export default (state= defaultStore, action) =>{
@@ -13,9 +16,15 @@ export default (state= defaultStore, action) =>{
         case types.SEARCH_FOCUS:
             return state.set('focused',true);
         case types.SEARCH_BLUR:
-            state.set('focused',false);
+            return state.set('focused',false);
         case types.CHANGE_LIST:
-            state.set('list',fromJS(action.data));
+            return state.set('list',fromJS(action.data)).set('totalPage',action.totalPage);
+        case types.MOUSE_ENTER:
+            return state.set('mouseIn',true);
+        case types.MOUSE_LEAVE:
+            return state.set('mouseIn',false);
+        case types.CHANGE_PAGE:
+            return state.set('page',action.page)
         default:
             return state;
     }

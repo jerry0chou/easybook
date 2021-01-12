@@ -18,19 +18,25 @@ import * as actionCreator from './store/actionCreator'
 
 class Header extends Component{
     getListArea(show){
-        const {focused,list} = this.props;
-        if(focused){
+        const {focused,list,page,totalPage,mouseIn,handleMouseEnter,handleMouseLeave,handleChangePage} = this.props;
+        const jsList = list.toJS();
+        const pageList = []
+        for (let i = (page-1)*10; i <page*10 ; i++) {
+            pageList.push(
+                <SearchInfoItem key={jsList[i]}>{jsList[i]}</SearchInfoItem>
+            )
+        }
+        if(focused || mouseIn){
             return (
-                <SearchInfo>
+                <SearchInfo
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
                     <SearchInfoTitle>热门搜索
-                        <SearchInfoSwitch>换一换</SearchInfoSwitch>
+                        <SearchInfoSwitch onClick = {()=>handleChangePage(page,totalPage)}>换一换</SearchInfoSwitch>
                     </SearchInfoTitle>
                     <SearchInfoList>
-                        {
-                            list.map((item)=>{
-                                return <SearchInfoItem key={item}>{item}</SearchInfoItem>
-                            })
-                        }
+                        {pageList}
                     </SearchInfoList>
                 </SearchInfo>
             );
@@ -71,7 +77,10 @@ class Header extends Component{
 const mapStateToProps = (state) => {
     return {
         focused: state.get('header').get('focused'),
-        list: state.getIn(['header','list'])
+        list: state.getIn(['header','list']),
+        page: state.getIn(['header','page']),
+        mouseIn: state.getIn(['header','mouseIn']),
+        totalPage: state.getIn(['header','totalPage']),
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -82,6 +91,19 @@ const mapDispatchToProps = (dispatch) => {
         },
         handleInputBlur() {
             dispatch(actionCreator.searchBlur());
+        },
+        handleMouseEnter(){
+            dispatch(actionCreator.mouseEnter());
+        },
+        handleMouseLeave(){
+            dispatch(actionCreator.mouseLeave())
+        },
+        handleChangePage(page,totalPage){
+            console.log(page,totalPage)
+            if(page<totalPage)
+                dispatch(actionCreator.changePage(page+1));
+            else
+                dispatch(actionCreator.changePage(1));
         }
     }
 }

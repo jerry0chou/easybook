@@ -10,11 +10,21 @@ export const searchBlur = () => ({
 })
 
 const changeList = (data) => {
+    console.log(Math.ceil(data.length / 10))
     return {
         type: types.CHANGE_LIST,
-        data: data
+        data: data,
+        totalPage: Math.ceil(data.length / 10)
     }
 }
+
+export const mouseEnter = () =>({
+    type:types.MOUSE_ENTER
+})
+export const mouseLeave = () =>({
+    type:types.MOUSE_LEAVE
+})
+export const changePage =(page)=>({type: types.CHANGE_PAGE,page})
 
 export const getList = () => {
     return (dispatch) => {
