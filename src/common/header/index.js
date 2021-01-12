@@ -18,7 +18,8 @@ import * as actionCreator from './store/actionCreator'
 
 class Header extends Component{
     getListArea(show){
-        if(this.props.focused){
+        const {focused,list} = this.props;
+        if(focused){
             return (
                 <SearchInfo>
                     <SearchInfoTitle>热门搜索
@@ -26,7 +27,7 @@ class Header extends Component{
                     </SearchInfoTitle>
                     <SearchInfoList>
                         {
-                            this.props.list.map((item)=>{
+                            list.map((item)=>{
                                 return <SearchInfoItem key={item}>{item}</SearchInfoItem>
                             })
                         }
@@ -39,6 +40,7 @@ class Header extends Component{
     }
     
     render() {
+        const {focused,handleInputFocus,handleInputBlur} = this.props;
         return (
             <HeaderWrapper>
                 <Logo href='/'/>
@@ -47,8 +49,8 @@ class Header extends Component{
                     <NavItem className='left'>下载APP</NavItem>
                     <NavItem className='right'>登陆</NavItem>
                     <NavItem className='right'>Aa</NavItem>
-                    <NavSearch className={this.props.focused ? 'focused' : ''} onFocus={this.props.handleInputFocus}
-                               onBlur={this.props.handleInputBlur}
+                    <NavSearch className={focused ? 'focused' : ''} onFocus={handleInputFocus}
+                               onBlur={handleInputBlur}
 
                     >
                     </NavSearch>

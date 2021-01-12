@@ -9,14 +9,14 @@ const defaultStore = fromJS({
 export default (state= defaultStore, action) =>{
     // immutable 对象的方法，会结合之前的immutable对象的值
     // 和设置的值，返回一个全新的对象
-    if(action.type === types.SEARCH_FOCUS){
-        return state.set('focused',true)
+    switch (action.type){
+        case types.SEARCH_FOCUS:
+            return state.set('focused',true);
+        case types.SEARCH_BLUR:
+            state.set('focused',false);
+        case types.CHANGE_LIST:
+            state.set('list',fromJS(action.data));
+        default:
+            return state;
     }
-    if(action.type === types.SEARCH_BLUR){
-        return state.set('focused',false)
-    }
-    if(action.type === types.CHANGE_LIST){
-        return state.set('list',fromJS(action.data))
-    }
-    return state;
 }
