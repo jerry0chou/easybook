@@ -23,7 +23,7 @@ class Topic extends Component {
 
 const mapState = (state) =>{
     return{
-        list: state.getIn(['home','topList']).toJS()
+        list: state.getIn(['home','topicList']).toJS()
     }
 }
 
