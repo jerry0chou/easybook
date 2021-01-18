@@ -1,4 +1,4 @@
-import React,{Component} from "react"
+import React,{PureComponent} from "react"
 import {connect} from 'react-redux'
 import {
     HeaderWrapper,
@@ -16,7 +16,7 @@ import {
 } from "./style";
 import * as actionCreator from './store/actionCreator'
 
-class Header extends Component{
+class Header extends PureComponent{
     getListArea(show){
         const {focused,list,page,totalPage,mouseIn,handleMouseEnter,handleMouseLeave,handleChangePage} = this.props;
         const jsList = list.toJS();
