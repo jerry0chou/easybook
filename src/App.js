@@ -8,14 +8,12 @@ import Detail from './pages/detail'
 function App() {
     return (
         <Provider store={store}>
-            <div>
+            <BrowserRouter>
                 <Header/>
-                <BrowserRouter>
-                    {/* exact 表示精确匹配*/}
-                    <Route path='/' exact component={Home}></Route>
-                    <Route path='/detail' exact component={Detail}></Route>
-                </BrowserRouter>
-            </div>
+                {/* exact 表示精确匹配*/}
+                <Route path='/' exact component={Home}></Route>
+                <Route path='/detail' exact component={Detail}></Route>
+            </BrowserRouter>
         </Provider>
     );
 }

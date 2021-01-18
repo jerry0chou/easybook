@@ -15,6 +15,7 @@ import {
     SearchInfoList
 } from "./style";
 import * as actionCreator from './store/actionCreator'
+import {Link} from "react-router-dom";
 
 class Header extends PureComponent{
     getListArea(show){
@@ -49,7 +50,9 @@ class Header extends PureComponent{
         const {focused,handleInputFocus,handleInputBlur} = this.props;
         return (
             <HeaderWrapper>
-                <Logo href='/'/>
+                <Link to='/'>
+                    <Logo />
+                </Link>
                 <Nav>
                     <NavItem className='left active'>首页</NavItem>
                     <NavItem className='left'>下载APP</NavItem>
