@@ -3,10 +3,13 @@ import Topic from "./components/Topic";
 import Writer from "./components/Writer";
 import List from "./components/List";
 import Recommend from "./components/Recommend";
-import {HomeWrapper,HomeLeft,HomeRight} from './style'
+import {HomeWrapper,HomeLeft,HomeRight,BackTop} from './style'
 import {connect} from 'react-redux'
 import * as actionCreator from './store/actionCreator'
 class Home extends Component{
+    handleScrollTop(){
+        window.scrollTo(0,0);
+    }
     render() {
         return (
             <HomeWrapper>
@@ -19,6 +22,7 @@ class Home extends Component{
                     <Recommend/>
                     <Writer/>
                 </HomeRight>
+                <BackTop onClick={this.handleScrollTop}>回到顶部</BackTop>
             </HomeWrapper>
         )
     }
