@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import * as actionCreator from './store/actionCreator'
 class Detail extends PureComponent {
     render() {
+        console.log()
         return (
             <DetailWrapper>
                 <Header>
@@ -15,7 +16,8 @@ class Detail extends PureComponent {
         )
     }
     componentDidMount() {
-        this.props.getDetail();
+        const id =this.props.match.params.id
+        this.props.getDetail(id);
     }
 }
 const mapState = (state) =>({
@@ -24,8 +26,8 @@ const mapState = (state) =>({
 })
 
 const mapDispatch = (dispatch) =>({
-    getDetail(){
-        dispatch(actionCreator.getDetail());
+    getDetail(id){
+        dispatch(actionCreator.getDetail(id));
     }
 })
 export default connect(mapState,mapDispatch)(Detail)

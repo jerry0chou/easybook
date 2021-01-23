@@ -12,7 +12,7 @@ function App() {
                 <Header/>
                 {/* exact 表示精确匹配*/}
                 <Route path='/' exact component={Home}></Route>
-                <Route path='/detail' exact component={Detail}></Route>
+                <Route path='/detail/:id' exact component={Detail}></Route>
             </BrowserRouter>
         </Provider>
     );
