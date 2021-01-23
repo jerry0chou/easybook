@@ -27,7 +27,6 @@ export const getHomeInfo = () => {
 export const getMoreList =()=>{
     return (dispatch)=>{
         axios.get('/api/homeList.json').then(res=>{
-            console.log(res.data.data)
             const result = res.data.data;
             dispatch(addHomeList(result))
         })

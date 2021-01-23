@@ -1,20 +1,19 @@
 import {fromJS} from "immutable";
 import * as types from './actionTypes'
 const defaultStore = fromJS({
-    title: '戴望舒——在最美的时光里错过',
-    content: `<img src='https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2083879881,1683628577&fm=26&gp=0.jpg'/>
-                    <p>你是否记得，那个在雨巷中独自哀愁的丁香一样的姑娘？戴望舒的一生，都在追寻那个有着丁香般芬芳的姑娘他凝望，他期盼，他等待，终究是一次又一次地错过那姑娘,那芬芳，一次又一次悔恨自责与幻想期待交织</p>
-                    <p>你是否记得，那个在雨巷中独自哀愁的丁香一样的姑娘？戴望舒的一生，都在追寻那个有着丁香般芬芳的姑娘他凝望，他期盼，他等待，终究是一次又一次地错过那姑娘,那芬芳，一次又一次悔恨自责与幻想期待交织</p>
-                    <p>你是否记得，那个在雨巷中独自哀愁的丁香一样的姑娘？戴望舒的一生，都在追寻那个有着丁香般芬芳的姑娘他凝望，他期盼，他等待，终究是一次又一次地错过那姑娘,那芬芳，一次又一次悔恨自责与幻想期待交织</p>
-                    <p>你是否记得，那个在雨巷中独自哀愁的丁香一样的姑娘？戴望舒的一生，都在追寻那个有着丁香般芬芳的姑娘他凝望，他期盼，他等待，终究是一次又一次地错过那姑娘,那芬芳，一次又一次悔恨自责与幻想期待交织</p>
-                    <p>你是否记得，那个在雨巷中独自哀愁的丁香一样的姑娘？戴望舒的一生，都在追寻那个有着丁香般芬芳的姑娘他凝望，他期盼，他等待，终究是一次又一次地错过那姑娘,那芬芳，一次又一次悔恨自责与幻想期待交织</p>`
+    title: '',
+    content: ''
 });
 
 export default (state = defaultStore, action) => {
     // immutable 对象的方法，会结合之前的immutable对象的值
     // 和设置的值，返回一个全新的对象
     switch (action.type) {
-
+        case types.CHANGE_DETAIL:
+            return state.merge({
+                title:action.title,
+                content: action.content
+            })
         default:
             return state;
     }
