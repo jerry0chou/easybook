@@ -47,7 +47,7 @@ class Header extends PureComponent{
     }
     
     render() {
-        const {focused,handleInputFocus,handleInputBlur} = this.props;
+        const {focused,handleInputFocus,handleInputBlur,isLogin} = this.props;
         return (
             <HeaderWrapper>
                 <Link to='/'>
@@ -56,7 +56,8 @@ class Header extends PureComponent{
                 <Nav>
                     <NavItem className='left active'>首页</NavItem>
                     <NavItem className='left'>下载APP</NavItem>
-                    <NavItem className='right'>登陆</NavItem>
+
+                    <Link to={isLogin ? '': '/login'}><NavItem className='right'>{isLogin ? '退出': '登陆'}</NavItem> </Link>
                     <NavItem className='right'>Aa</NavItem>
                     <NavSearch className={focused ? 'focused' : ''} onFocus={handleInputFocus}
                                onBlur={handleInputBlur}
@@ -84,6 +85,7 @@ const mapStateToProps = (state) => {
         page: state.getIn(['header','page']),
         mouseIn: state.getIn(['header','mouseIn']),
         totalPage: state.getIn(['header','totalPage']),
+        isLogin: state.getIn(['login','isLogin'])
     }
 }
 const mapDispatchToProps = (dispatch) => {
